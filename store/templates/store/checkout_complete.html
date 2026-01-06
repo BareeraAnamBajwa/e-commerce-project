@@ -1,0 +1,164 @@
+{% extends "./base.html" %}
+{% load static %} 
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Time</title>
+    <script>
+        function getCurrentTime() {
+            let now = new Date();
+            let day = now.getDate().toString().padStart(2, '0');
+            let monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+            let month = monthNames[now.getMonth()];
+            let year = now.getFullYear();
+            
+            let hours = now.getHours();
+            let minutes = now.getMinutes().toString().padStart(2, '0');
+            let ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12; // Convert 24-hour time to 12-hour format
+
+            let formattedTime = `${day} ${month} ${year} ${hours}:${minutes}${ampm}`;
+            document.getElementById("transaction-time").innerText = formattedTime;
+        }
+    </script>
+</head>
+        <!-- BEGIN #checkout-cart -->
+        <div class="section-container" id="checkout-cart">
+            <!-- BEGIN container -->
+            <div class="container">
+                <!-- BEGIN checkout -->
+                <div class="checkout">
+                    <form action="{% url 'checkout_info' %}" method="POST" name="form_checkout">
+                        <!-- BEGIN checkout-header -->
+                        <div class="checkout-header">
+                            <!-- BEGIN row -->
+                            <div class="row">
+                                <!-- BEGIN col-3 -->
+                                <div class="col-md-3 col-sm-3">
+                                    <div class="step">
+                                        <a href="{% url 'checkout_cart' %}">
+                                            <div class="number">1</div>
+                                            <div class="info">
+                                                <div class="title">Delivery Options</div>
+                                                <div class="desc">Lorem ipsum dolor sit amet.</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- END col-3 -->
+                                <!-- BEGIN col-3 -->
+                                <div class="col-md-3 col-sm-3">
+                                    <div class="step">
+                                        <a href="{% url 'checkout_info' %}">
+                                            <div class="number">2</div>
+                                            <div class="info">
+                                                <div class="title">Shipping Address</div>
+                                                <div class="desc">Vivamus eleifend euismod.</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- END col-3 -->
+                                <!-- BEGIN col-3 -->
+                                <div class="col-md-3 col-sm-3">
+                                    <div class="step">
+                                        <a href="{% url 'checkout_payment' %}">
+                                            <div class="number">3</div>
+                                            <div class="info">
+                                                <div class="title">Payment</div>
+                                                <div class="desc">Aenean ut pretium ipsum. </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- END col-3 -->
+                                <!-- BEGIN col-3 -->
+                                <div class="col-md-3 col-sm-3">
+                                    <div class="step active">
+                                        <a href="#">
+                                            <div class="number">4</div>
+                                            <div class="info">
+                                                <div class="title">Complete Payment</div>
+                                                <div class="desc">Curabitur interdum libero.</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- END col-3 -->
+                            </div>
+                            <!-- END row -->
+                        </div>
+                        <!-- END checkout-header -->
+                        <!-- BEGIN checkout-body -->
+                        <div class="checkout-body">
+                            <!-- BEGIN checkout-message -->
+                            <div class="checkout-message">
+                                <h1>Thank you! <small>Your Payment has been successfully processed with the following details.</small></h1>
+                                <div class="table-responsive2">
+                                    <table class="table table-payment-summary">
+                                        <tbody>
+                                            <tr>
+                                                <td class="field">Transaction Status</td>
+                                                <td class="value" style="color: green;">Success</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="field">Transaction Reference No.</td>
+                                                <td class="value">REF000001</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="field">Bank Authorised Code</td>
+                                                <td class="value">AUTH000001</td>
+                                            </tr>
+                                            <body onload="getCurrentTime()">
+                                                    <tr onload="getCurrentTime()">
+                                                        <td class="field">Transaction Date and Time</td>
+                                                        <td class="value" id="transaction-time"></td>
+                                                    </tr>
+                                            <tr>
+                                                <td class="field">Orders</td>
+                                                <td class="value product-summary">
+                                                    <!-- <br>
+                                                    <div class="product-summary-img"  >
+                                                        <img src="{{ cart.pro_id.image_display_url }}" alt="" />
+                                                    </div>                                                         -->
+                                                        {% for cart in carts %}
+                                                        <div class="title" style="font-size: large;" >
+                                                            {{ forloop.counter }}.  {{ cart.pro_id }}
+                                                        </div>
+                                                        {% endfor %}
+                                                        <br>
+                                                        <div class="desc" style="color: red;">Delivery will be very soon</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="field">Payment Amount (RM)</td>
+                                                <td class="value">${{ cart_subtotal }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p class="text-muted text-center m-b-0">Should you require any assistance, you can get in touch with Support Team at (123) 456-7890</p>
+                            </div>
+                            <!-- END checkout-message -->
+                        </div>
+                        <!-- END checkout-body -->
+                        <!-- BEGIN checkout-footer -->
+                        <!-- END checkout-footer -->
+                    </form>
+                </div>
+                <div class="checkout-footer text-center">
+                    <a href="{% url "checkout_cart" %}">
+                    <button type="submit" class="btn btn-white btn-lg p-l-30 p-r-30 m-l-10">Manage Orders</button>
+                    </a>
+                </div>
+                <!-- END checkout -->
+            </div>
+            <!-- END container -->
+        </div>
+        <!-- END #checkout-cart -->
+         
+{% endblock content %}

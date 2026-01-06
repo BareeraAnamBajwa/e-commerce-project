@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+ <head>
+    <meta charset="utf-8" />
+    <title>E-Commerce Front End Theme</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    
+    {% load static %}
+     
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'plugins/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style-responsive.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/theme/default.css' %}" id="theme" rel="stylesheet" />
+    <link href="{% static 'css/animate.min.css' %}" rel="stylesheet" />
+    <!-- ================== END BASE CSS STYLE ================== -->
+    
+    <!-- ================== BEGIN BASE JS ================== -->
+    <script src="{% static 'plugins/pace/pace.min.js' %}"></script>
+    <!-- ================== END BASE JS ================== -->
+</head>
+<body class="bg-silver">
+    <!-- BEGIN #page-container -->
+    <div id="page-container" class="fade">
+        {% include "./top_nav.html" %}
+        {% include "./header.html" %}
+        {% block content %} {% endblock content %}
+        {% include "./policy.html" %}
+        {% include "./footer.html" %}
+    </div>
+    <!-- begin theme-panel -->
+    <div class="theme-panel">
+        <a href="javascript:;" data-click="theme-panel-expand" class="theme-collapse-btn"><i class="fa fa-cog"></i></a>
+        <div class="theme-panel-content">
+            <ul class="theme-list clearfix">
+                <li><a href="javascript:;" class="bg-purple" data-theme="purple" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Purple">&nbsp;</a></li>
+                <li><a href="javascript:;" class="bg-blue" data-theme="blue" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Blue">&nbsp;</a></li>
+                <li class="active"><a href="javascript:;" class="bg-green" data-theme="default" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Default">&nbsp;</a></li>
+                <li><a href="javascript:;" class="bg-orange" data-theme="orange" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Orange">&nbsp;</a></li>
+                <li><a href="javascript:;" class="bg-red" data-theme="red" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Red">&nbsp;</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- end theme-panel -->
+    	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="{% static 'plugins/jquery/jquery-1.9.1.min.js' %}"></script>
+	<script src="{% static 'plugins/jquery/jquery-migrate-1.1.0.min.js' %}"></script>
+	<script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script> 
+	<!--[if lt IE 9]>
+		<script src="crossbrowserjs/html5shiv.js"></script>
+		<script src="crossbrowserjs/respond.min.js"></script>
+		<script src="crossbrowserjs/excanvas.min.js"></script>
+	<![endif]-->
+ <script src="{% static 'plugins/jquery-cookie/jquery.cookie.js' %}"></script>
+	<script src="{% static 'js/apps.min.js' %}"></script> 
+	 <!-- ================== END BASE JS ================== -->
+	
+	<script>
+	    $(document).ready(function() {
+	        App.init(); 
+	    });
+	</script>
+</body>
+</html>
+
+
